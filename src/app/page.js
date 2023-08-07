@@ -1,10 +1,19 @@
+import React from 'react'
+import Movies from './components/Movies';
 
-export default function Home() {
+const Page = async ({searchParams}) => {
+  const res = await fetch(`https://api.themoviedb.org/3/${searchParams.genre?"movie/"+searchParams.genre:"trending/all/day"}?api_key=52b7aaf2076ea011bb2ebdef1295e7fc&language=en-US&page=1 {next:{revalidate:10000}}`)
+
+  const data = await res.json()
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <h1>HEllo World</h1>
-      </div>
-    </main>
+    <div>
+      {
+        data?.results?.map((dt,i)=>(
+          <Movies key={i} props={dt}/>
+        ))
+      }
+    </div>
   )
 }
+
+export default Page

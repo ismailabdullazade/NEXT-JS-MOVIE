@@ -1,5 +1,6 @@
 import Providers from './Providers'
 import Header from './components/Header'
+import Tabs from './components/Tabs'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -16,6 +17,7 @@ const Layout = ({ children }) => {
       <body>
         <Providers>
           <Header/>
+          <Tabs/>
           {children}
         </Providers>
       </body>
